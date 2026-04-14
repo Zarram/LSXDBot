@@ -3,7 +3,8 @@ Discord both for LSXD World of Warcraft Guild
 List of upcoming changes
 1. Online hosting for pictures
 2. Secret value for discord api key
-3. More commands
+3. seperate embeb picture code from each command
+5. More commands
 
 
 Potential
