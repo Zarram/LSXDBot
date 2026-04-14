@@ -5,7 +5,8 @@ List of upcoming changes
 2. Secret value for discord api key
 3. Seperate embed picture code from each command
 4. Maybe change from embeded files to just posting the picture/gif
-5. More commands
+5. Look into slash commands
+6. More commands
 
 
 Potential
