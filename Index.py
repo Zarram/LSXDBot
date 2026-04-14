@@ -7,13 +7,24 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
+#Images hosted on Discord for easy access, ipload to a Discord chat and copy the URL, then add to the dictionary below
+IMAGE_URLS = {
+    '!congrats': 'https://media.discordapp.net/attachments/818907457253408768/1493600433615147018/angry-congrats.gif?ex=69df8f4d&is=69de3dcd&hm=6bf09ca8067087868d7c76967612fcb125a504f3dec40f816840bd8a6f498cac&=',
+    '!login': 'https://media.discordapp.net/attachments/818907457253408768/1493600435485933680/login.gif?ex=69df8f4d&is=69de3dcd&hm=eebeeaaa6c12e669b2716624149899ef57af5b393eb77b2213a21485bbc3f1c1&=',
+    '!mygm': 'https://media.discordapp.net/attachments/818907457253408768/1493600436588908735/mygm.png?ex=69df8f4d&is=69de3dcd&hm=b17ef794740230b9d227335d50960adfc0adc7d7faa642d153ea2c1c8cbddd39&=&format=webp&quality=lossless',
+}
+
+
+
+# Event handler for when the bot is ready
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
-
+# Listen for messages and respond to commands uses ! as the prefix, e.g. !hello, !congrats, !status, !login, !mygm
 @client.event
 async def on_message(message):
+    # Prevent the bot from responding to its own messages
     if message.author == client.user:
         return
 
@@ -21,36 +32,25 @@ async def on_message(message):
         await message.channel.send('Hello!')
     
     if message.content.startswith('!congrats'):
-        file = discord.File(r'C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\angry-congrats.gif', filename="angry-congrats.gif")
-        embed = discord.Embed()
-        embed.set_image(url="attachment://angry-congrats.gif")
-        await message.channel.send(file=file, embed=embed)
+        await message.channel.send(IMAGE_URLS['!congrats'])
 
     if message.content.startswith('!status'):
-        images = [
-            r"C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\Its joever.png", 
-            r"C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\barack.png"
-        ]
-
-        chosen = random.choice(images)
-        file= discord.File(chosen, filename="content.png")
-        embed = discord.Embed()
-        embed.set_image(url="attachment://content.png")
-
-        await message.channel.send(file=file, embed=embed)
+        # For the !status command, we want to randomly choose from a list of images, so we create a separate list for that
+        RANDOM_IMAGE_URLS = [
+    'https://media.discordapp.net/attachments/818907457253408768/1493600434894667776/Its_joever.png?ex=69df8f4d&is=69de3dcd&hm=b355885b5e3b59254733917aa78ff0e727784e2a2454db2ddc0734f2d4950e99&=&format=webp&quality=lossless',
+    'https://media.discordapp.net/attachments/818907457253408768/1493600437750857928/Were_Barack.webp?ex=69df8f4e&is=69de3dce&hm=0c303bb62da89602ac8536861e843e80fdcc84bfcc27b76f99cb99cb13e8bfcb&=&format=webp',
+]
+        chosen_url = random.choice(RANDOM_IMAGE_URLS)
+        await message.channel.send(chosen_url)
 
     if message.content.startswith('!login'):
-        file = discord.File(r'C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\login.gif', filename="login.gif")
-        embed = discord.Embed()
-        embed.set_image(url="attachment://login.gif")
-        await message.channel.send(file=file, embed=embed)
+        await message.channel.send(IMAGE_URLS['!login'])
 
     if message.content.startswith('!mygm'):
-        file = discord.File(r'C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\mygm.png', filename="mygm.png")
-        embed = discord.Embed()
-        embed.set_image(url="attachment://mygm.png")
-        await message.channel.send(file=file, embed=embed)
+        await message.channel.send(IMAGE_URLS['!mygm'])
 
+#For security, the API key is stored in a separate file
 token = APIKey.DISCORD_API_KEY
 
+# Run the bot
 client.run(token)
