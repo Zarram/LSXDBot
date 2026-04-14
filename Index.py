@@ -20,7 +20,7 @@ async def on_message(message):
     if message.content.startswith('!hello'):
         await message.channel.send('Hello!')
     
-        if message.content.startswith('!congrats'):
+    if message.content.startswith('!congrats'):
         file = discord.File(r'C:\Users\theca\Documents\Projects\LSXD Discord Bot\Pictures\angry-congrats.gif', filename="angry-congrats.gif")
         embed = discord.Embed()
         embed.set_image(url="attachment://angry-congrats.gif")
