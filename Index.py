@@ -15,6 +15,18 @@ IMAGE_URLS = {
     '!cinema': 'https://cdn.discordapp.com/attachments/1457739209606434846/1490516111115026603/GUZr4rVWwAAvGgi.png?ex=69df8b8d&is=69de3a0d&hm=e69e899678befe6a8487d5e428abfd45c9776a13a4ddb990be2fabe1181b8d14&',
 }
 
+# Dictionary of commands and their descriptions for auto-updating help
+COMMANDS = {
+    '!hello': 'The bot will greet you.',
+    '!congrats': 'The bot will send a congratulatory image.',
+    '!status': 'The bot will send a random status image.',
+    '!login': 'The bot will send a login image.',
+    '!mygm': 'The bot will send a MyGM image.',
+    '!cinema': 'The bot will send a cinema image.',
+    '!raiddays': 'The bot will tell you the raid days.',
+    '!help': 'Displays this help message.',
+}
+
 
 
 # Event handler for when the bot is ready
@@ -55,6 +67,16 @@ async def on_message(message):
 
     if message.content.startswith('!raiddays'):
         await message.channel.send('Wednesday and Monday 20-23 ServerTime! Optionally raid on Sundays as well!')
+
+    if message.content.startswith('!test'):
+        await message.channel.send('This is a test command!')
+
+    if message.content.startswith('!help'):
+        help_message = "Here are the commands you can use:\n"
+        for cmd, desc in COMMANDS.items():
+            help_message += f"{cmd} - {desc}\n"
+        await message.author.send(help_message)
+ 
 
 #For security, the API key is stored in a separate file
 token = APIKey.DISCORD_API_KEY
