@@ -1,6 +1,6 @@
 import discord
 import random
-import os
+import APIKey
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -51,7 +51,6 @@ async def on_message(message):
         embed.set_image(url="attachment://mygm.png")
         await message.channel.send(file=file, embed=embed)
 
-# Get Token from GitHub Enviroment Variable
-token = os.getenv("DISCORD_API_KEY")
+token = APIKey.DISCORD_API_KEY
 
 client.run(token)
